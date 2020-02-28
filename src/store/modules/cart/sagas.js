@@ -31,7 +31,7 @@ function* addToCart({id}) {
       priceFormatted: formatPrice(response.data.price),
     };
     yield put(addToCartSuccess(data));
-    //NavigationService.navigate('Cart');
+    NavigationService.navigate('Cart');
   }
 }
 
