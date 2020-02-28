@@ -7,11 +7,9 @@ export const Wrapper = styled.SafeAreaView`
 `;
 
 export const Container = styled.View`
-  flex: 1;
   flex-direction: row;
   align-content: center;
   justify-content: space-between;
-  background: ${colors.dark};
   padding: 20px;
 `;
 

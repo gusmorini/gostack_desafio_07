@@ -1,14 +1,64 @@
 import React from 'react';
-import {View} from 'react-native';
+import {Text} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as CartActions from '../../store/modules/cart/actions';
 import {formatPrice} from '../../util/format';
 
-import {Container} from './styles';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import colors from '../../styles/colors';
 
-function Cart() {
-  return <Container />;
+import {
+  Container,
+  Products,
+  Product,
+  ProductInfo,
+  ProductImage,
+  ProductDetails,
+  ProductTitle,
+  ProductPrice,
+  ProductDelete,
+} from './styles';
+
+function Cart({
+  navigation,
+  products,
+  total,
+  removeFromCart,
+  updateAmountRequest,
+}) {
+  return (
+    <Container>
+      {products.length ? (
+        <React.Fragment>
+          <Products>
+            {products.map(p => (
+              <Product key={p.id}>
+                <ProductInfo>
+                  <ProductImage source={{uri: p.image}} />
+                  <ProductDetails>
+                    <ProductTitle>{p.title}</ProductTitle>
+                    <ProductPrice>{p.priceFormatted}</ProductPrice>
+                  </ProductDetails>
+                  <ProductDelete>
+                    <Icon
+                      name="delete-forever"
+                      size={24}
+                      color={colors.primary}
+                    />
+                  </ProductDelete>
+                </ProductInfo>
+              </Product>
+            ))}
+          </Products>
+        </React.Fragment>
+      ) : (
+        <React.Fragment>
+          <Text>nada</Text>
+        </React.Fragment>
+      )}
+    </Container>
+  );
 }
 
 const mapStateToProps = state => ({
