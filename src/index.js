@@ -1,6 +1,7 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import {Text, StatusBar} from 'react-native';
+import './config/reactotronConfig';
+import {StatusBar} from 'react-native';
 import colors from './styles/colors';
 import Routes from './routes';
 import store from './store';
