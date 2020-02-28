@@ -1,5 +1,10 @@
 import React from 'react';
 import {FlatList} from 'react-native';
+
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as CartActions from '../../store/modules/cart/actions';
+
 import api from '../../services/api';
 import {formatPrice} from '../../util/format';
 
@@ -28,7 +33,6 @@ class Main extends React.Component {
 
   getProducts = async () => {
     const response = await api.get('/products');
-    // add priceFormatted in products
     const data = response.data.map(p => ({
       ...p,
       priceFormatted: formatPrice(p.price),
@@ -37,6 +41,8 @@ class Main extends React.Component {
   };
 
   renderProduct = ({item}) => {
+    const {amount} = this.props;
+
     return (
       <Product key={item.id}>
         <ProductImage source={{uri: item.image}} />
@@ -69,4 +75,17 @@ class Main extends React.Component {
   }
 }
 
-export default Main;
+const mapStateToProps = state => ({
+  amount: state.cart.reduce((amount, product) => {
+    amount[product.id] = product.amount;
+    return amount;
+  }, {}),
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(CartActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Main);
