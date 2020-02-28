@@ -12,8 +12,8 @@ export const Product = styled.View`
   padding: 10px;
   margin: 15px;
   border-radius: 4px;
-  width: 200px;
-  max-height: 350px;
+  width: 250px;
+  max-height: 380px;
 `;
 
 export const ProductImage = styled.Image.attrs({
@@ -37,4 +37,33 @@ export const ProductPrice = styled.Text.attrs({
   margin-bottom: 14px;
   font-weight: bold;
   margin-top: auto;
+`;
+
+export const AddButton = styled.TouchableOpacity`
+  background: ${colors.primary};
+  flex-direction: row;
+  align-items: center;
+  border-radius: 4px;
+  margin-top: auto;
+`;
+
+export const AddButtonText = styled.Text`
+  flex: 1;
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+`;
+
+export const ProductAmount = styled.View`
+  padding: 12px;
+  background: ${darken(0.03, colors.primary)};
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const ProductAmountText = styled.Text`
+  color: #fff;
+  margin: 0px 4px 0px 10px;
 `;

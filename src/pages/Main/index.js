@@ -1,7 +1,9 @@
 import React from 'react';
-import {FlatList, SafeAreaView} from 'react-native';
+import {FlatList} from 'react-native';
 import api from '../../services/api';
 import {formatPrice} from '../../util/format';
+
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
   Container,
@@ -9,6 +11,10 @@ import {
   ProductImage,
   ProductTitle,
   ProductPrice,
+  AddButton,
+  AddButtonText,
+  ProductAmount,
+  ProductAmountText,
 } from './styles';
 
 class Main extends React.Component {
@@ -36,6 +42,13 @@ class Main extends React.Component {
         <ProductImage source={{uri: item.image}} />
         <ProductTitle>{item.title}</ProductTitle>
         <ProductPrice>{item.priceFormatted}</ProductPrice>
+        <AddButton>
+          <ProductAmount>
+            <Icon name="add-shopping-cart" color="#fff" size={20} />
+            <ProductAmountText>{0}</ProductAmountText>
+          </ProductAmount>
+          <AddButtonText>Adicionar</AddButtonText>
+        </AddButton>
       </Product>
     );
   };
