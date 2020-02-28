@@ -10,7 +10,8 @@ function* addToCart({id}) {
   const productExists = yield select(state =>
     state.cart.find(p => p.id === id),
   );
-  const stock = yield call(api.get, `stock/${id}`);
+
+  const stock = yield call(api.get, `/stock/${id}`);
   const stockAmount = stock.data.amount;
   const currentAmount = productExists ? productExists.amount : 0;
   const amount = currentAmount + 1;
@@ -23,14 +24,14 @@ function* addToCart({id}) {
   if (productExists) {
     yield put(updateAmountSuccess(id, amount));
   } else {
-    const response = yield call(api.get, `product/${id}`);
+    const response = yield call(api.get, `/products/${id}`);
     const data = {
       ...response.data,
       amount,
       priceFormatted: formatPrice(response.data.price),
     };
     yield put(addToCartSuccess(data));
-    NavigationService.navigate('Cart');
+    //NavigationService.navigate('Cart');
   }
 }
 

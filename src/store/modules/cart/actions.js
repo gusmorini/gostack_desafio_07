@@ -29,7 +29,7 @@ export function updateAmountRequest(id, amount) {
 
 export function updateAmountSuccess(id, amount) {
   return {
-    type: '@cart/ADD_AMOUNT_SUCCESS',
+    type: '@cart/UPDATE_AMOUNT_SUCCESS',
     id,
     amount,
   };
