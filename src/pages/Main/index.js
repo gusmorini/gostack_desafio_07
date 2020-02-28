@@ -1,8 +1,15 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {FlatList, SafeAreaView} from 'react-native';
 import api from '../../services/api';
+import {formatPrice} from '../../util/format';
 
-// import { Container } from './styles';
+import {
+  Container,
+  Product,
+  ProductImage,
+  ProductTitle,
+  ProductPrice,
+} from './styles';
 
 class Main extends React.Component {
   state = {
@@ -15,16 +22,36 @@ class Main extends React.Component {
 
   getProducts = async () => {
     const response = await api.get('/products');
-    this.setState({products: response.data});
-    console.log(this.state.products);
+    // add priceFormatted in products
+    const data = response.data.map(p => ({
+      ...p,
+      priceFormatted: formatPrice(p.price),
+    }));
+    this.setState({products: data});
+  };
+
+  renderProduct = ({item}) => {
+    return (
+      <Product key={item.id}>
+        <ProductImage source={{uri: item.image}} />
+        <ProductTitle>{item.title}</ProductTitle>
+        <ProductPrice>{item.priceFormatted}</ProductPrice>
+      </Product>
+    );
   };
 
   render() {
     const {products} = this.state;
     return (
-      <View>
-        <Text>Home</Text>
-      </View>
+      <Container>
+        <FlatList
+          horizontal
+          data={products}
+          extraData={this.props}
+          keyExtractor={item => String(item.id)}
+          renderItem={this.renderProduct}
+        />
+      </Container>
     );
   }
 }
