@@ -3,8 +3,8 @@ import {darken} from 'polished';
 import colors from '../../styles/colors';
 
 export const Container = styled.View`
-  background: ${colors.dark};
-  flex: 1;
+  /* background: ${colors.dark}; */
+  /* flex: 1; */
 `;
 
 export const Product = styled.View`
@@ -13,7 +13,7 @@ export const Product = styled.View`
   margin: 15px;
   border-radius: 4px;
   width: 250px;
-  max-height: 380px;
+  /* max-height: 380px; */
 `;
 
 export const ProductImage = styled.Image.attrs({

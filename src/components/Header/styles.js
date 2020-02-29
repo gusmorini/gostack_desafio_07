@@ -11,6 +11,7 @@ export const Container = styled.View`
   align-content: center;
   justify-content: space-between;
   padding: 20px;
+  flex: 1;
 `;
 
 export const Logo = styled.Image.attrs({
