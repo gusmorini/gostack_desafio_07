@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {ScrollView} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as CartActions from '../../store/modules/cart/actions';
@@ -22,6 +22,13 @@ import {
   ProductControlButton,
   ProductAmount,
   ProductSubtotal,
+  TotalContainer,
+  TotalText,
+  TotalAmount,
+  Order,
+  OrderText,
+  EmptyContainer,
+  EmptyText,
 } from './styles';
 
 function Cart({
@@ -40,55 +47,65 @@ function Cart({
   }
 
   return (
-    <Container>
-      {products.length ? (
-        <React.Fragment>
-          <Products>
-            {products.map(p => (
-              <Product key={p.id}>
-                <ProductInfo>
-                  <ProductImage source={{uri: p.image}} />
-                  <ProductDetails>
-                    <ProductTitle>{p.title}</ProductTitle>
-                    <ProductPrice>{p.priceFormatted}</ProductPrice>
-                  </ProductDetails>
-                  <ProductDelete onPress={() => removeFromCart(p.id)}>
-                    <Icon
-                      name="delete-forever"
-                      size={24}
-                      color={colors.primary}
-                    />
-                  </ProductDelete>
-                </ProductInfo>
+    <ScrollView>
+      <Container>
+        {products.length ? (
+          <React.Fragment>
+            <Products>
+              {products.map(p => (
+                <Product key={p.id}>
+                  <ProductInfo>
+                    <ProductImage source={{uri: p.image}} />
+                    <ProductDetails>
+                      <ProductTitle>{p.title}</ProductTitle>
+                      <ProductPrice>{p.priceFormatted}</ProductPrice>
+                    </ProductDetails>
+                    <ProductDelete onPress={() => removeFromCart(p.id)}>
+                      <Icon
+                        name="delete-forever"
+                        size={24}
+                        color={colors.primary}
+                      />
+                    </ProductDelete>
+                  </ProductInfo>
 
-                <ProductControls>
-                  <ProductControlButton onPress={() => decrement(p)}>
-                    <Icon
-                      name="remove-circle-outline"
-                      size={20}
-                      color={colors.primary}
-                    />
-                  </ProductControlButton>
-                  <ProductAmount value={String(p.amount)} />
-                  <ProductControlButton onPress={() => increment(p)}>
-                    <Icon
-                      name="add-circle-outline"
-                      size={20}
-                      color={colors.primary}
-                    />
-                  </ProductControlButton>
-                  <ProductSubtotal>{p.subtotal}</ProductSubtotal>
-                </ProductControls>
-              </Product>
-            ))}
-          </Products>
-        </React.Fragment>
-      ) : (
-        <React.Fragment>
-          <Text>nada</Text>
-        </React.Fragment>
-      )}
-    </Container>
+                  <ProductControls>
+                    <ProductControlButton onPress={() => decrement(p)}>
+                      <Icon
+                        name="remove-circle-outline"
+                        size={20}
+                        color={colors.primary}
+                      />
+                    </ProductControlButton>
+                    <ProductAmount value={String(p.amount)} />
+                    <ProductControlButton onPress={() => increment(p)}>
+                      <Icon
+                        name="add-circle-outline"
+                        size={20}
+                        color={colors.primary}
+                      />
+                    </ProductControlButton>
+                    <ProductSubtotal>{p.subtotal}</ProductSubtotal>
+                  </ProductControls>
+                </Product>
+              ))}
+            </Products>
+            <TotalContainer>
+              <TotalText>total</TotalText>
+              <TotalAmount>{total}</TotalAmount>
+              <Order>
+                <OrderText>finalizar pedido</OrderText>
+              </Order>
+            </TotalContainer>
+          </React.Fragment>
+        ) : (
+          <EmptyContainer>
+            <Icon name="remove-shopping-cart" size={64} color="#eee" />
+            <EmptyText>Seu carrinho está vazio.</EmptyText>
+          </EmptyContainer>
+        )}
+      </Container>
+    </ScrollView>
   );
 }
 

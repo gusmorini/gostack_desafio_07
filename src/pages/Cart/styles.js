@@ -9,6 +9,7 @@ export const Container = styled.View`
 `;
 
 export const Products = styled.View``;
+
 export const Product = styled.View``;
 
 export const ProductInfo = styled.View`
@@ -68,4 +69,49 @@ export const ProductSubtotal = styled.Text`
   font-size: 16px;
   flex: 1;
   text-align: right;
+`;
+
+export const TotalContainer = styled.View`
+  margin-top: 30px;
+`;
+
+export const TotalText = styled.Text`
+  text-align: center;
+  color: #999;
+  font-weight: bold;
+  text-transform: uppercase;
+`;
+
+export const TotalAmount = styled.Text`
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 30px;
+  font-size: 32px;
+  font-weight: bold;
+`;
+
+export const Order = styled.TouchableOpacity`
+  background: ${colors.primary};
+  padding: 12px;
+  border-radius: 4px;
+`;
+
+export const OrderText = styled.Text`
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  text-transform: uppercase;
+`;
+
+export const EmptyContainer = styled.View`
+  align-items: center;
+  justify-content: center;
+  padding: 100px 0px;
+`;
+
+export const EmptyText = styled.Text`
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 18px;
 `;
