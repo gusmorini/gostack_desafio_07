@@ -18,6 +18,10 @@ import {
   ProductTitle,
   ProductPrice,
   ProductDelete,
+  ProductControls,
+  ProductControlButton,
+  ProductAmount,
+  ProductSubtotal,
 } from './styles';
 
 function Cart({
@@ -27,6 +31,14 @@ function Cart({
   removeFromCart,
   updateAmountRequest,
 }) {
+  function decrement(product) {
+    updateAmountRequest(product.id, product.amount - 1);
+  }
+
+  function increment(product) {
+    updateAmountRequest(product.id, product.amount + 1);
+  }
+
   return (
     <Container>
       {products.length ? (
@@ -40,7 +52,7 @@ function Cart({
                     <ProductTitle>{p.title}</ProductTitle>
                     <ProductPrice>{p.priceFormatted}</ProductPrice>
                   </ProductDetails>
-                  <ProductDelete>
+                  <ProductDelete onPress={() => removeFromCart(p.id)}>
                     <Icon
                       name="delete-forever"
                       size={24}
@@ -48,6 +60,25 @@ function Cart({
                     />
                   </ProductDelete>
                 </ProductInfo>
+
+                <ProductControls>
+                  <ProductControlButton onPress={() => decrement(p)}>
+                    <Icon
+                      name="remove-circle-outline"
+                      size={20}
+                      color={colors.primary}
+                    />
+                  </ProductControlButton>
+                  <ProductAmount value={String(p.amount)} />
+                  <ProductControlButton onPress={() => increment(p)}>
+                    <Icon
+                      name="add-circle-outline"
+                      size={20}
+                      color={colors.primary}
+                    />
+                  </ProductControlButton>
+                  <ProductSubtotal>{p.subtotal}</ProductSubtotal>
+                </ProductControls>
               </Product>
             ))}
           </Products>

@@ -37,4 +37,35 @@ export const ProductPrice = styled.Text`
   margin-top: 5px;
 `;
 
-export const ProductDelete = styled.TouchableOpacity``;
+export const ProductDelete = styled.TouchableOpacity`
+  padding: 6px;
+`;
+
+export const ProductControls = styled.View`
+  flex-direction: row;
+  align-items: center;
+  background: #eee;
+  padding: 8px;
+  border-radius: 4px;
+`;
+
+export const ProductControlButton = styled.TouchableOpacity``;
+
+export const ProductAmount = styled.TextInput.attrs({
+  readonly: true,
+})`
+  background: #fff;
+  padding: 5px;
+  margin: 0 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  min-width: 50px;
+  text-align: center;
+`;
+
+export const ProductSubtotal = styled.Text`
+  font-weight: bold;
+  font-size: 16px;
+  flex: 1;
+  text-align: right;
+`;
